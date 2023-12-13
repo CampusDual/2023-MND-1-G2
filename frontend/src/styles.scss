@@ -17,15 +17,16 @@ textarea {
 .navMenu {
   nav.ng-star-inserted:first-of-type {
     order: 999 !important;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 }
 
 .mat-drawer-opened {
   .o-app-sidenav-image-container {
     .o-app-sidenav-image {
-      width: 200px;
+      width: 175px;
       text-align: center;
+      margin-top: -25px;
     }
   }
 }
