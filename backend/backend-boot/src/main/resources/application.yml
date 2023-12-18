@@ -5,6 +5,9 @@ logging:
    level:
       root: info
 ontimize:
+   export:
+      url: /export
+      enable: true
    corsfilter:
       enabled: true
    globalcors:
