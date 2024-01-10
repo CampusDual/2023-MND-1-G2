@@ -6,6 +6,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CONFIG } from './app.config';
+import { AlertsComponent } from './alerts/alerts.component';
+import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 
 // Standard providers...
 // Defining custom providers (if needed)...
@@ -20,7 +22,9 @@ export const customProviders: any = [
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    AlertsComponent,
+    AlertDialogComponent
   ],
   bootstrap: [
     AppComponent

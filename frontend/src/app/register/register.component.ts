@@ -4,102 +4,40 @@ import {
   Injector,
   OnInit,
   ViewChild,
+  ViewEncapsulation,
 } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RouterLink } from "@angular/router";
-import { DialogService, OntimizeService } from "ontimize-web-ngx";
+import { DialogService, OFormComponent, OntimizeService } from "ontimize-web-ngx";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-register",
+  selector: 'app-register',
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup = new FormGroup({});
-  nameCtrl: FormControl = new FormControl("", Validators.required);
-  pwdCtrl: FormControl = new FormControl("", Validators.required);
-  rpwdCtrl: FormControl = new FormControl("", Validators.required);
-
-  service: OntimizeService;
-
+  protected userService: OntimizeService;
+  @ViewChild("signUpForm", { static: false }) signUpForm: OFormComponent;
   constructor(
     protected injector: Injector,
     protected dialogService: DialogService
   ) {
-    this.service = this.injector.get(OntimizeService);
+    this.userService = this.injector.get(OntimizeService);
   }
 
   ngOnInit() {
     this.configureService();
-
-    this.registerForm.addControl("name", this.nameCtrl);
-    this.registerForm.addControl("password", this.pwdCtrl);
-    this.registerForm.addControl("repeat_password", this.rpwdCtrl);
+    this.signUpForm.setInsertMode();
   }
 
   protected configureService() {
-    const conf = this.service.getDefaultServiceConfiguration("users");
-    this.service.configureService(conf);
+    const conf = this.userService.getDefaultServiceConfiguration("users");
+    this.userService.configureService(conf);
   }
 
-  register() {
-    if (
-      this.registerForm.value.password != "" &&
-      this.registerForm.value.repeat_password != "" &&
-      this.registerForm.value.name != ""
-    ) {
-      if (
-        this.registerForm.value.password ===
-        this.registerForm.value.repeat_password
-      ) {
-        if (this.service !== null) {
-          const values = {
-            USER_: this.registerForm.value.name,
-            PASSWORD: this.registerForm.value.password,
-            NAME: this.registerForm.value.name,
-          };
-          this.service.insert(values, "register").subscribe(
-            (resp) => {
-              if (resp.code === 0) {
-                if (this.dialogService) {
-                  this.dialogService.info(
-                    "SUCCESSFUL_TITLE",
-                    "SUCCESSFUL_INSERT_USER_MSG"
-                  );
-                  this.injector.get(Router).navigate(["/login"]);
-                }
-              } else {
-                console.log(resp);
-                console.log("resp");
-              }
-            },
-            (error) => {
-              if (this.dialogService) {
-                this.dialogService.error("ERROR", error);
-              }
-            }
-          );
-        }
-      } else {
-        if (this.dialogService) {
-          this.dialogService.error("ERROR", "ERROR_PASSWORD_MSG");
-        }
-      }
-    } else {
-      if (this.dialogService) {
-        this.dialogService.error("ERROR", "ERROR_FIELD_EMPTY_MSG");
-      }
-    }
-  }
-
-  handleError(error) {
-    switch (error.status) {
-      case 401:
-        console.error("Email or password is wrong.");
-        break;
-      default:
-        break;
-    }
-  }
+  public async signUpUser(){
+    this.signUpForm.insert();
+}
 }

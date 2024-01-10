@@ -13,6 +13,8 @@ import com.ontimize.jee.common.db.SQLStatementBuilder.ExtendedSQLConditionValues
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.dto.EntityResultMapImpl;
 import com.ontimize.jee.server.dao.DefaultOntimizeDaoHelper;
+import com.ontimize.jee.webclient.export.base.ExcelExportService;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.postgresql.util.PGInterval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -20,6 +22,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import com.ontimize.jee.webclient.export.base.ExcelExportRestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +49,13 @@ public class ProjectService implements IProjectService {
     public EntityResult projectQuery(Map<String, Object> keyMap, List<?> attrList) {
         return this.daoHelper.query(this.projectDao, keyMap, attrList);
     }
+    public EntityResult exportProjectQuery (Map<String, Object> keyMap, List<?> attrList){
+    EntityResult a=this.daoHelper.query(this.projectDao, keyMap, attrList);
+        int b = a.getColumnSQLType("Estado");
+         a.deleteRecord(b);
+        return a;
+    }
+
 
     @Override
     public EntityResult projectInsert(Map<String, Object> attrMap) {

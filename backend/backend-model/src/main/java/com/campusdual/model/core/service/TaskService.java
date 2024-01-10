@@ -276,10 +276,10 @@ public class TaskService implements ITaskService {
     @Override
     public EntityResult projectTaskDelete(Map<?, ?> keyMap) {
         EntityResult err;
-        try{
+        try {
             err = this.daoHelper.delete(this.taskDao, keyMap);
 
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             err = new EntityResultMapImpl();
             err.setCode(EntityResult.OPERATION_WRONG);
             err.setMessage("DELETE_TASK_ERROR");

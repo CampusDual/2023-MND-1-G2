@@ -24,5 +24,6 @@ public class UserDao extends OntimizeJdbcDaoSupport {
     public static final String USERBLOCKED = "USERBLOCKED";
     public static final String LASTPASSWORDUPDATE = "LASTPASSWORDUPDATE";
     public static final String FIRSTLOGIN = "FIRSTLOGIN";
+    public static final String USERS_TO_SHARE_QUERY="query_users_to_share";
 
 }
