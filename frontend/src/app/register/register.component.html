@@ -1,58 +1,47 @@
 <div class="full-page">
   <div class="login-outer-container">
+
+    <div class="login-bg-container">
+    </div>
+
     <div class="wrapp-login">
       <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container">
-        <o-language-selector ng-reflect-use-flag-icons="false" class="lenguage">
-          <div fxfill="" fxlayout="" fxlayoutalign="center center" ng-reflect-fx-layout=""
-            ng-reflect-fx-layout-align="center center"
-            style="height: 100%; min-height: 100%; min-width: 100%; width: 100%; flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
 
-            <button aria-haspopup="true"
-              class="menu-button o-language-selector-text mat-menu-trigger mat-button mat-button-base ng-star-inserted"
-              mat-button="" type="button" ng-reflect-menu="[object Object]"><span
-                class="mat-button-wrapper"><span>ES</span></span>
-              <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false"
-                ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div>
-              <div class="mat-button-focus-overlay"></div>
-            </button>
-          </div><mat-menu class="" yposition="below" ng-reflect-y-position="below"
-            ng-reflect-panel-class="o-mat-menu"></mat-menu>
-        </o-language-selector>
-
-        <o-image id="logo" attr="image" data="assets/images/subsify_round_logo.png" auto-fit="false" enabled="false"
-          read-only="true" show-controls="no" width="60%" height="40%"></o-image>
-        <o-form #signUpForm show-header="no" service="signUps" entity="signUp">
           <div class="login-title-container" fxLayout="column">
-            <span class="title_text">{{ "SIGN_UP_TITLE" | oTranslate }}:</span>
+            <span class="title_text">{{ 'REGISTER_TITLE' | oTranslate }}:</span>
           </div>
-          <o-row>
-            <o-text-input id="input" attr="USER_" required="yes">
-              <mat-icon oMatSuffix>person</mat-icon>
-            </o-text-input>
-          </o-row>
-          <o-row>
-            <o-email-input id="input" attr="EMAIL" required="yes"></o-email-input>
-          </o-row>
-          <o-row>
-            <p class="password-message" id="password-description" attr="PASSWORD_MESSAGE">{{ "PASSWORD_MESSAGE" | oTranslate }}</p>
-          </o-row>
-          <o-row>
-            <o-password-input id="input" attr="PASSWORD" required="yes"></o-password-input>
-          </o-row>
-          <o-row>
-            <o-password-input id="input" attr="CONFIRM_PASS" required="yes"></o-password-input>
-          </o-row>
-          <o-button type="STROKED" label="{{ 'REGISTER' | oTranslate }}" color="primary"
-            (click)="signUpUser()"></o-button>
-          <p id="AccountText">{{ "ALREADY_SIGNED" | oTranslate }}
 
-            <a id="a" routerLink="/login">{{ "LOGIN" | oTranslate }}
-            <!-- <a id="a" href="/login">{{ "LOGIN" | oTranslate }} -->
-            
-            </a>
-          </p>
-        </o-form>
+          <div>
+            <mat-form-field fxFill class="m-top-16">
+              <input matInput #name class="mat-input" placeholder="{{ 'USERNAME' | oTranslate }}" id="name" [formControl]="nameCtrl">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field fxFill class="m-top-16">
+              <input matInput #password class="mat-input" placeholder="{{ 'PASSWORD' | oTranslate }}" id="password" type="password" [formControl]="pwdCtrl">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field fxFill class="m-top-16">
+              <input matInput #password class="mat-input" placeholder="{{ 'REPEAT_PASSWORD' | oTranslate }}" id="repeat_password" type="password" [formControl]="rpwdCtrl">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" type="submit">{{ 'SIGN_UP' | oTranslate }}</button>
+          <div class="already-acc">
+            <a routerLink="/login">{{ 'HAVE_ACC' | oTranslate }}</a>
+          </div>
+        </form>
       </div>
+
     </div>
   </div>
+
+  <div id="footer" class="footer-container">
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <span>{{ 'FOOTER_CREATED_BY' | oTranslate }}</span>
+      <span> · 2023 </span>
+    </div>
+  </div>
+
 </div>
