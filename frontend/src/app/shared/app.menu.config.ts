@@ -6,10 +6,5 @@ export const MENU_CONFIG: MenuRootItem[] = [
   { id: 'tasks', name: 'TASKS', route: '/main/tasks', icon: 'playlist_add_check' },
   { id: 'record', name: 'RECORD', route: '/main/record', icon: 'history' },
   { id: 'logout', name: 'LOGOUT', route: '/login', icon: 'power_settings_new', confirm: 'yes' },
-  {
-    id: "delete-account",
-    name: "DELETE",
-    icon: "person_remove",
-    confirm: "yes",
-  }
+ 
 ];

@@ -49,6 +49,14 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.repeat_password != "" &&
       this.registerForm.value.name != ""
     ) {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      if (!passwordRegex.test(this.registerForm.value.password)) {
+        if (this.dialogService) {
+          this.dialogService.error("ERROR", "Contraseña no válida");
+        }
+        return true;
+      }
+  
       if (
         this.registerForm.value.password ===
         this.registerForm.value.repeat_password
